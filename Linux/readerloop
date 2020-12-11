@@ -1,0 +1,12 @@
+
+#! /bin/bash
+while IFS= read -r line do
+echo "$line" ;
+date=$(echo $line | awk -F" " '{print $0}');
+tod=$(echo $line | awk -F" " '{print $2" "$3}') ;
+whichsched=$(echo $line | awk -F" " '{print $1"_Dealer_schedule"}') ;
+whathour=$(echo $line | awk -F" " '{print $2}');
+amorpm=$(echo $line | awk -F" " '{print $3}');
+dealer=$(grep $whathour $whichsched | grep $amorpm | awk -F" " '{print  $5" "$6}') ;
+echo $date $tod $dealer;
+done
